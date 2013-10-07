@@ -112,8 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ca2b085bcad48f69a52f50f2e245c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfSamples: 2048
-  numberOfBands: 8
+  numberOfSamples: 512
+  bandType: 3
+  bandWidth: 1
 --- !u!1 &1930439419
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ AudioSource:
   m_GameObject: {fileID: 1930439419}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 2bc0c961adc124c38a5f3de540d5d17d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4b281eebbbe6c48c6b32b25e86dec812, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

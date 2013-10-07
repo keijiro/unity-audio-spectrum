@@ -7,11 +7,23 @@ using UnityEditor;
 public class AudioSpectrumInspector : Editor
 {
     static string[] sampleOptionStrings = {
-        "64", "128", "256", "512", "1024", "2048", "4096"
+        "256", "512", "1024", "2048", "4096"
     };
     static int[] sampleOptions = {
-        64, 128, 256, 512, 1024, 2048, 4096
+        256, 512, 1024, 2048, 4096
     };
+    static string[] bandOptionStrings = {
+        "4 band", "4 band (visual)", "8 band", "10 band (ISO standard)", "26 band (custom)", "31 band (FBQ3102)"
+    };
+    static int[] bandOptions = {
+        (int)AudioSpectrum.BandType.fourBand,
+        (int)AudioSpectrum.BandType.fourBandVisual,
+        (int)AudioSpectrum.BandType.eightBand,
+        (int)AudioSpectrum.BandType.tenBand,
+        (int)AudioSpectrum.BandType.twentySixBandCustom,
+        (int)AudioSpectrum.BandType.thirtyOneBand
+    };
+
     AnimationCurve curve;
 
     void UpdateCurve ()
@@ -37,10 +49,10 @@ public class AudioSpectrumInspector : Editor
             curve = new AnimationCurve ();
         }
 
-        spectrum.NumberOfBands = EditorGUILayout.IntField ("Number of Bands", spectrum.NumberOfBands);
-        spectrum.NumberOfSamples = EditorGUILayout.IntPopup ("Number of Samples", spectrum.NumberOfSamples, sampleOptionStrings, sampleOptions);
+        spectrum.numberOfSamples = EditorGUILayout.IntPopup ("Number of Samples", spectrum.numberOfSamples, sampleOptionStrings, sampleOptions);
+        spectrum.bandType = (AudioSpectrum.BandType)EditorGUILayout.IntPopup ("Band type", (int)spectrum.bandType, bandOptionStrings, bandOptions);
 
-        EditorGUILayout.CurveField (curve, Color.white, new Rect (0, 0, 1.0f, 0.5f), GUILayout.Height (64));
+        EditorGUILayout.CurveField (curve, Color.white, new Rect (0, 0, 1.0f, 0.2f), GUILayout.Height (64));
 
         if (EditorApplication.isPlaying) {
             EditorUtility.SetDirty (target);
