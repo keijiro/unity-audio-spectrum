@@ -1,11 +1,14 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿// Audio spectrum component
+// By Keijiro Takahashi, 2013
+// https://github.com/keijiro/unity-audio-spectrum
+using UnityEngine;
 using UnityEditor;
+using System.Collections;
 
 [CustomEditor(typeof(AudioSpectrum))]
 public class AudioSpectrumInspector : Editor
 {
+    #region Static definitions
     static string[] sampleOptionStrings = {
         "256", "512", "1024", "2048", "4096"
     };
@@ -23,39 +26,51 @@ public class AudioSpectrumInspector : Editor
         (int)AudioSpectrum.BandType.twentySixBandCustom,
         (int)AudioSpectrum.BandType.thirtyOneBand
     };
+    #endregion
 
+    #region Temporary state variables
     AnimationCurve curve;
+    #endregion
 
+    #region Private functions
     void UpdateCurve ()
     {
+        var spectrum = target as AudioSpectrum;
+
+        // Create a new curve to update the UI.
         curve = new AnimationCurve ();
 
-        var spectrum = target as AudioSpectrum;
+        // Add keys for the each band.
         var bands = spectrum.BandLevels;
-        var time = 0.0f;
-        foreach (var band in bands) {
-            curve.AddKey (time, band);
-            time += 1.0f / bands.Length;
+        for (var i = 0; i < bands.Length; i++) {
+            curve.AddKey(1.0f / bands.Length * i, bands[i]);
         }
     }
+    #endregion
 
+    #region Editor callbacks
     public override void OnInspectorGUI ()
     {
         var spectrum = target as AudioSpectrum;
 
+        // Update the curve only when it's playing.
         if (EditorApplication.isPlaying) {
             UpdateCurve ();
         } else if (curve == null) {
             curve = new AnimationCurve ();
         }
 
+        // Component properties.
         spectrum.numberOfSamples = EditorGUILayout.IntPopup ("Number of Samples", spectrum.numberOfSamples, sampleOptionStrings, sampleOptions);
         spectrum.bandType = (AudioSpectrum.BandType)EditorGUILayout.IntPopup ("Band type", (int)spectrum.bandType, bandOptionStrings, bandOptions);
 
-        EditorGUILayout.CurveField (curve, Color.white, new Rect (0, 0, 1.0f, 0.2f), GUILayout.Height (64));
+        // Shows the spectrum curve.
+        EditorGUILayout.CurveField (curve, Color.white, new Rect (0, 0, 1.0f, 0.1f), GUILayout.Height (64));
 
+        // Update frequently while it's playing.
         if (EditorApplication.isPlaying) {
             EditorUtility.SetDirty (target);
         }
     }
+    #endregion
 }

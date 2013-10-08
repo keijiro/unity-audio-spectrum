@@ -112,9 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ca2b085bcad48f69a52f50f2e245c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfSamples: 512
-  bandType: 3
-  bandWidth: 1
+  numberOfSamples: 2048
+  bandType: 5
 --- !u!1 &1930439419
 GameObject:
   m_ObjectHideFlags: 0
