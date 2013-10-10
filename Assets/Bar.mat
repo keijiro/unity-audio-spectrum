@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: New Material
+  m_Name: Bar
   m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_SavedProperties:
@@ -24,4 +24,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .580882311, g: .559526324, b: .559526324, a: 1}
+        second: {r: .654411793, g: .0721777603, b: .0721777603, a: 1}
