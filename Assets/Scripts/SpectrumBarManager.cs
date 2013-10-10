@@ -25,6 +25,7 @@ public class SpectrumBarManager : MonoBehaviour
                     var x = 6.0f * i / barCount - 3.0f + barWidth / 2;
                     var bar = Instantiate (barPrefab, Vector3.right * x, transform.rotation) as GameObject;
                     bar.GetComponent<SpectrumBar> ().index = i;
+                    bar.GetComponent<SpectrumBar> ().showPeak = true;
                     bar.transform.parent = transform;
                     var scale = bar.transform.localScale;
                     scale.x = barWidth * 0.9f;

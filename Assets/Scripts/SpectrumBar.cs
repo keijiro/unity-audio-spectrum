@@ -4,6 +4,7 @@ using System.Collections;
 public class SpectrumBar : MonoBehaviour
 {
     public int index;
+    public bool showPeak;
     AudioSpectrum spectrum;
 
     void Awake()
@@ -15,7 +16,7 @@ public class SpectrumBar : MonoBehaviour
     {
         if (index < spectrum.BandLevels.Length) {
             var scale = transform.localScale;
-            scale.y = spectrum.BandLevels[index] * 20;
+            scale.y = (showPeak ? spectrum.BandMeans[index] : spectrum.BandLevels[index]) * 20;
             transform.localScale = scale;
         }
     }

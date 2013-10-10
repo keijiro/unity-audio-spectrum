@@ -229,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfSamples: 1024
   bandType: 3
+  peakFalldownSpeed: 2
 --- !u!1 &1835998371
 GameObject:
   m_ObjectHideFlags: 0
