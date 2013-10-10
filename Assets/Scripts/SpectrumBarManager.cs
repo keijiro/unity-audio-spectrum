@@ -22,7 +22,7 @@ public class SpectrumBarManager : MonoBehaviour
 
                 // Create new bars.
                 for (var i = 0; i < barCount; i++) {
-                    var x = 6.0f * i / barCount - 3.0f + barWidth / 2 - 0.25f;
+                    var x = 6.0f * i / barCount - 3.0f + barWidth / 2;
                     var bar = Instantiate (barPrefab, Vector3.right * x, transform.rotation) as GameObject;
                     bar.GetComponent<SpectrumBar> ().index = i;
                     bar.transform.parent = transform;
