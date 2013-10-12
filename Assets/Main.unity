@@ -258,7 +258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86bd11abf008e464d839ae396ba868d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barType: 2
   barPrefab: {fileID: 100000, guid: 487fa15ecc1f94528913e8cede437480, type: 2}
   labelStyle:
     m_Name: 

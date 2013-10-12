@@ -3,23 +3,27 @@ using System.Collections;
 
 public class Visualizer : MonoBehaviour
 {
-    public SpectrumBar.BarType barType;
     public GameObject barPrefab;
     public GUIStyle labelStyle;
 
-    AudioSpectrum spectrum;
-    SpectrumBar.BarType prevBarType;
+    SpectrumBar.BarType barType;
     int barCount;
-
-    void Start ()
-    {
-        spectrum = FindObjectOfType (typeof(AudioSpectrum)) as AudioSpectrum;
-    }
 
     void Update ()
     {
-        if (barCount == spectrum.Levels.Length && barType == prevBarType) {
+        var spectrum = GetComponent<AudioSpectrum>();
+
+        if (barCount == spectrum.Levels.Length && !Input.GetMouseButtonDown(0)) {
             return;
+        }
+
+        // Change the bar type on mouse click.
+        if (Input.GetMouseButtonDown(0)) {
+            if (barType == SpectrumBar.BarType.MeanLevel) {
+                barType = SpectrumBar.BarType.Realtime;
+            } else {
+                barType++;
+            }
         }
 
         // Destroy the old bars.
@@ -44,15 +48,12 @@ public class Visualizer : MonoBehaviour
             bar.transform.parent = transform;
             bar.transform.localScale = barScale;
         }
-
-        prevBarType = barType;
     }
 
     void OnGUI ()
     {
         var text = "Current mode: " + barType + "\n";
-        text += "Use the inspector to change the mode.\n";
-        text += "(see 'Bar Type' in 'Visualizer').";
+        text += "Click the screen to change the mode.";
         GUI.Label (new Rect(0, 0, Screen.width, Screen.height), text, labelStyle);
     }
 }
