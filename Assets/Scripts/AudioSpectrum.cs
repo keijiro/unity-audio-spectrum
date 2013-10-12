@@ -12,7 +12,7 @@ public class AudioSpectrum : MonoBehaviour
         FourBandVisual,
         EightBand,
         TenBand,
-        TwentySixBandCustom,
+        TwentySixBand,
         ThirtyOneBand
     };
 
