@@ -6,6 +6,9 @@ It provides spectrum data as a set of [octave bands]
 (http://en.wikipedia.org/wiki/Octave_band) which is commonly used in music visualizers.
 You can easily use these data to make audio visualization in Unity apps.
 
+For a detailed example, see [the test branch]
+(https://github.com/keijiro/unity-audio-spectrum/tree/test).
+
 Setup
 -----
 
