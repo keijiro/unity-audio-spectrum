@@ -26,10 +26,10 @@ but reduce performance.
 There are several octave band types.
 
 - 4 band
-- 4 band (visual) - only covers middle ranges
+- 4 band (visual) - only covers low and middle ranges
 - 8 band
 - 10 band (ISO standard)
-- 24 band (custom)
+- 24 band 
 - 31 band (FBQ3012)
 
 #### Fall speed
@@ -53,4 +53,5 @@ The array which provides the peak level of the each band.
 
 #### float[] MeanLevels
 
-The array which provides the mean level of the each band.
+The array which provides the mean level for a short period of the time.
+These values respond slower than real-time values and suit for make smooth animations.
