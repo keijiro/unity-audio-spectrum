@@ -8,12 +8,12 @@ public class AudioSpectrum : MonoBehaviour
 {
     #region Band type definition
     public enum BandType {
-        fourBand,
-        fourBandVisual,
-        eightBand,
-        tenBand,
-        twentySixBandCustom,
-        thirtyOneBand
+        FourBand,
+        FourBandVisual,
+        EightBand,
+        TenBand,
+        TwentySixBandCustom,
+        ThirtyOneBand
     };
 
     static float[][] middleFrequenciesForBands = {
@@ -36,7 +36,7 @@ public class AudioSpectrum : MonoBehaviour
 
     #region Public variables
     public int numberOfSamples = 1024;
-    public BandType bandType = BandType.tenBand;
+    public BandType bandType = BandType.TenBand;
     public float fallSpeed = 0.08f;
     public float sensibility = 8.0f;
     #endregion

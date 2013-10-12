@@ -19,12 +19,12 @@ public class AudioSpectrumInspector : Editor
         "4 band", "4 band (visual)", "8 band", "10 band (ISO standard)", "26 band (custom)", "31 band (FBQ3102)"
     };
     static int[] bandOptions = {
-        (int)AudioSpectrum.BandType.fourBand,
-        (int)AudioSpectrum.BandType.fourBandVisual,
-        (int)AudioSpectrum.BandType.eightBand,
-        (int)AudioSpectrum.BandType.tenBand,
-        (int)AudioSpectrum.BandType.twentySixBandCustom,
-        (int)AudioSpectrum.BandType.thirtyOneBand
+        (int)AudioSpectrum.BandType.FourBand,
+        (int)AudioSpectrum.BandType.FourBandVisual,
+        (int)AudioSpectrum.BandType.EightBand,
+        (int)AudioSpectrum.BandType.TenBand,
+        (int)AudioSpectrum.BandType.TwentySixBandCustom,
+        (int)AudioSpectrum.BandType.ThirtyOneBand
     };
     #endregion
 

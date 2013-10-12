@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpectrumBar : MonoBehaviour
 {
-    public enum BarType { realtime, peak, mean };
+    public enum BarType { Realtime, PeakLevel, MeanLevel };
 
     public int index;
     public BarType barType;
@@ -21,13 +21,13 @@ public class SpectrumBar : MonoBehaviour
             float scale = 0.0f;
 
             switch (barType) {
-            case BarType.realtime:
+            case BarType.Realtime:
                 scale = spectrum.Levels[index];
                 break;
-            case BarType.peak:
+            case BarType.PeakLevel:
                 scale = spectrum.PeakLevels[index];
                 break;
-            case BarType.mean:
+            case BarType.MeanLevel:
                 scale = spectrum.MeanLevels[index];
                 break;
             }
