@@ -37,27 +37,28 @@ public class AudioSpectrum : MonoBehaviour
     #region Public variables
     public int numberOfSamples = 1024;
     public BandType bandType = BandType.tenBand;
-    public float peakFalldownSpeed = 0.08f;
+    public float fallSpeed = 0.08f;
+    public float sensibility = 8.0f;
     #endregion
 
     #region Private variables
     float[] rawSpectrum;
-    float[] bandLevels;
-    float[] bandPeaks;
-    float[] bandMeans;
+    float[] levels;
+    float[] peakLevels;
+    float[] meanLevels;
     #endregion
 
     #region Public property
-    public float[] BandLevels {
-        get { return bandLevels; }
+    public float[] Levels {
+        get { return levels; }
     }
 
-    public float[] BandPeaks {
-        get { return bandPeaks; }
+    public float[] PeakLevels {
+        get { return peakLevels; }
     }
     
-    public float[] BandMeans {
-        get { return bandMeans; }
+    public float[] MeanLevels {
+        get { return meanLevels; }
     }
     #endregion
 
@@ -68,10 +69,10 @@ public class AudioSpectrum : MonoBehaviour
             rawSpectrum = new float[numberOfSamples];
         }
         var bandCount = middleFrequenciesForBands [(int)bandType].Length;
-        if (bandLevels == null || bandLevels.Length != bandCount) {
-            bandLevels = new float[bandCount];
-            bandPeaks = new float[bandCount];
-            bandMeans = new float[bandCount];
+        if (levels == null || levels.Length != bandCount) {
+            levels = new float[bandCount];
+            peakLevels = new float[bandCount];
+            meanLevels = new float[bandCount];
         }
     }
 
@@ -96,9 +97,11 @@ public class AudioSpectrum : MonoBehaviour
 
         float[] middlefrequencies = middleFrequenciesForBands [(int)bandType];
         var bandwidth = bandwidthForBands [(int)bandType];
-        var falldown = peakFalldownSpeed * Time.deltaTime;
 
-        for (var bi = 0; bi < bandLevels.Length; bi++) {
+        var falldown = fallSpeed * Time.deltaTime;
+        var filter = Mathf.Exp (-sensibility * Time.deltaTime);
+
+        for (var bi = 0; bi < levels.Length; bi++) {
             int imin = FrequencyToSpectrumIndex (middlefrequencies [bi] / bandwidth);
             int imax = FrequencyToSpectrumIndex (middlefrequencies [bi] * bandwidth);
 
@@ -107,9 +110,9 @@ public class AudioSpectrum : MonoBehaviour
                 bandMax = Mathf.Max (bandMax, rawSpectrum [fi]);
             }
 
-            bandLevels [bi] = bandMax;
-            bandPeaks [bi] = Mathf.Max (bandPeaks [bi] - falldown, bandLevels [bi]);
-            bandMeans [bi] = bandLevels [bi] - (bandLevels [bi] - bandMeans [bi]) * Mathf.Exp (-4.0f * Time.deltaTime);
+            levels [bi] = bandMax;
+            peakLevels [bi] = Mathf.Max (peakLevels [bi] - falldown, bandMax);
+            meanLevels [bi] = bandMax - (bandMax - meanLevels [bi]) * filter;
         }
     }
     #endregion

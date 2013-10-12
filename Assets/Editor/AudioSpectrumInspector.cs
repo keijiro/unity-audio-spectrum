@@ -41,9 +41,9 @@ public class AudioSpectrumInspector : Editor
         curve = new AnimationCurve ();
 
         // Add keys for the each band.
-        var bands = spectrum.BandLevels;
+        var bands = spectrum.Levels;
         for (var i = 0; i < bands.Length; i++) {
-            curve.AddKey(1.0f / bands.Length * i, bands[i]);
+            curve.AddKey (1.0f / bands.Length * i, bands [i]);
         }
     }
     #endregion
@@ -61,8 +61,10 @@ public class AudioSpectrumInspector : Editor
         }
 
         // Component properties.
-        spectrum.numberOfSamples = EditorGUILayout.IntPopup ("Number of Samples", spectrum.numberOfSamples, sampleOptionStrings, sampleOptions);
+        spectrum.numberOfSamples = EditorGUILayout.IntPopup ("Number of samples", spectrum.numberOfSamples, sampleOptionStrings, sampleOptions);
         spectrum.bandType = (AudioSpectrum.BandType)EditorGUILayout.IntPopup ("Band type", (int)spectrum.bandType, bandOptionStrings, bandOptions);
+        spectrum.fallSpeed = EditorGUILayout.Slider ("Fall speed", spectrum.fallSpeed, 0.01f, 4.0f);
+        spectrum.sensibility = EditorGUILayout.Slider ("Sensibility", spectrum.sensibility, 1.0f, 20.0f);
 
         // Shows the spectrum curve.
         EditorGUILayout.CurveField (curve, Color.white, new Rect (0, 0, 1.0f, 0.1f), GUILayout.Height (64));

@@ -3,8 +3,11 @@ using System.Collections;
 
 public class SpectrumBar : MonoBehaviour
 {
+    public enum BarType { realtime, peak, mean };
+
     public int index;
-    public bool showPeak;
+    public BarType barType;
+
     AudioSpectrum spectrum;
 
     void Awake()
@@ -14,10 +17,24 @@ public class SpectrumBar : MonoBehaviour
 
     void Update ()
     {
-        if (index < spectrum.BandLevels.Length) {
-            var scale = transform.localScale;
-            scale.y = (showPeak ? spectrum.BandMeans[index] : spectrum.BandLevels[index]) * 20;
-            transform.localScale = scale;
+        if (index < spectrum.Levels.Length) {
+            float scale = 0.0f;
+
+            switch (barType) {
+            case BarType.realtime:
+                scale = spectrum.Levels[index];
+                break;
+            case BarType.peak:
+                scale = spectrum.PeakLevels[index];
+                break;
+            case BarType.mean:
+                scale = spectrum.MeanLevels[index];
+                break;
+            }
+
+            var vs = transform.localScale;
+            vs.y = scale * 20.0f;
+            transform.localScale = vs;
         }
     }
 }
