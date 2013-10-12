@@ -1,6 +1,8 @@
 unity-audio-spectrum
 ====================
 
+![Screenshot](http://keijiro.github.io/unity-audio-spectrum/Screenshot.png)
+
 This is a set of C# scripts which provides spectrum data with audio output.
 It provides spectrum data as a set of [octave bands]
 (http://en.wikipedia.org/wiki/Octave_band) which is commonly used in music visualizers.
@@ -18,6 +20,8 @@ Setup
 
 Options
 -------
+
+![Inspector](http://keijiro.github.io/unity-audio-spectrum/Inspector.png)
 
 #### Number of samples
 
